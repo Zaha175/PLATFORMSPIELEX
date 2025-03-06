@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spieleplattform</title>
+    <meta name="description" content="Spieleplattform">
+    <meta name="keywords" content="MPU, Spieleplattform, Leistungstests, Reaktionstests, Konzentrationsübungen">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Allgemeine Stile */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/m5jbKxn54d6Q01a4tMJgN.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.3;
+        }
+
+        /* Container für die gesamte Seite */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #003366;
+            color: #ffd700;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode header {
+            background-color: #1a1a1a;
+        }
+
+        /* Zentrierte Karten mit Hover-Effekten */
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 10px;
+            background-color: #003366;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s;
+            width: 100%; /* Volle Breite des Containers, passend zum Iframe */
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 4px solid #002244;
+            min-height: 80px; /* Minimale Höhe für bessere Lesbarkeit */
+        }
+
+        .menu-item:hover {
+            background-color: #0055a5;
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Iframe-Styling für Vorschaubilder */
+        .menu-item-iframe {
+            width: 100%;
+            height: 150px; /* Reduzierte Höhe für Desktop */
+            border: 2px solid #003366; /* Rahmen um das Iframe */
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item-iframe:hover {
+            transform: scale(1.02); /* Leichter Zoom-Effekt beim Hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .menu-item-iframe {
+            border-color: #1a1a1a; /* Dunkler Rahmen im Dark-Mode */
+        }
+
+        /* Media Queries für kleinere Bildschirme */
+        @media (max-width: 1024px) {
+            .menu-item-iframe {
+                height: 120px; /* Kleinere Höhe für kleinere Bildschirme */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-item-iframe {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-item-iframe {
+                height: 80px;
+            }
+        }
+
+        /* Container für Button und Iframe */
+        .game-container {
+            width: calc(33.33% - 13.33px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .game-container {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                width: 100%;
+            }
+        }
+
+        /* Dark-Mode-Toggle */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            z-index: 11;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background-color: #1a1a1a;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #23272b;
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Würfel-Container */
+        #cube-container {
+            position: absolute;
+            top: 2px;
+            left: 20px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #cube-container button {
+            margin-bottom: 0;
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            width: auto;
+            border-radius: 5px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #cube-container button:hover {
+            background-color: #0055a5;
+            transform: scale(1.1);
+        }
+
+        #cube-container iframe {
+            width: 145px;
+            height: 80px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>SPIELEPLATTFORM ULTRA</header>
+    
+    <!-- Würfel-Container oben links -->
+    <div id="cube-container">
+        <button class="button button-small" onclick="window.open('https://zaha175.github.io/BILDPUZZLEPLATFORM/', '_blank')">
+            CUB <i class="fas fa-external-link-alt"></i>
+        </button>
+        <iframe src="https://zaha175.github.io/BILDPUZZLEPLATFORM/" style="width: 145px; height: 80px; border: none;"></iframe>
+    </div>
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+    <div class="container">
+        <div class="menu-container">
+            <!-- Bestehende Spiele -->
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">FIGURENVERGLEICHSTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST1/', '_blank')">FIGURENVERGLEICHSTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST1/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST2/', '_blank')">FIGURENVERGLEICHSTEST3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST2/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FARBENTEST1/', '_blank')">FARBENTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FARBENTEST1/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FARBENTEST2/', '_blank')">FARBENTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FARBENTEST2/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FARBENTEST3/', '_blank')">FARBENTEST3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FARBENTEST3/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/', '_blank')">FARBENFIGURENTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/', '_blank')">FARBENFIGURENTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">VERKEHRSITUATIONSTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/Verkehrssituationstext/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/PUZZLEBILDAPP/', '_blank')">VERKEHRSITUATIONSTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/PUZZLEBILDAPP/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/', '_blank')">VERKEHRSITUATIONSTEST3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')">MERHFACHSITUATIONSTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/MERHFACHSITUATIONSTEST/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/', '_blank')">MERHFACHSITUATIONSTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/', '_blank')">MERHFACHSITUATIONSTEST3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/"></iframe>
+            </div>
+            <!-- GROKFLOTTE-Spiele -->
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/GROKFLOTTE1/', '_blank')">GROKFLOTTE1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/GROKFLOTTE1/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/GROKFLOTTE2/', '_blank')">GROKFLOTTE2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/GROKFLOTTE2/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/GROKFLOTTE3/', '_blank')">GROKFLOTTE3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/GROKFLOTTE3/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/GROKFLOTTE4/', '_blank')">GROKFLOTTE4</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/GROKFLOTTE4/"></iframe>
+            </div>
+            <!-- Neue Spiele -->
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/Reaktionstest0/', '_blank')">REAKTIONSTEST1</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/Reaktionstest0/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/Reaktionstest2/', '_blank')">REAKTIONSTEST2</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/Reaktionstest2/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/Reaktionstest3NEU/', '_blank')">REAKTIONSTEST3</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/Reaktionstest3NEU/"></iframe>
+            </div>
+            <div class="game-container">
+                <div class="menu-item" onclick="window.open('https://zaha175.github.io/STEINPAPIERSCHERE/', '_blank')">STEINPAPIERSCHERE</div>
+                <iframe class="menu-item-iframe" src="https://zaha175.github.io/STEINPAPIERSCHERE/"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('darkMode'));
+        }
+
+        // Lade Dark-Mode beim Start
+        window.onload = () => {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+    </script>
+</body>
+
+</html>
