@@ -30,8 +30,13 @@
         }
     </script>
     <style>
+        /* 3D Rotation Animation */
+        @keyframes rotateCard {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+        
         .card {
-            transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -40,11 +45,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg);
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: rotateCard 1s ease forwards;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
         
         .card::before {
@@ -63,6 +71,9 @@
             position: relative;
             z-index: 1;
             text-align: center;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            width: 100%;
         }
         
         .test-card {
@@ -112,6 +123,17 @@
         .reaktion-bg {
             background-color: #90EE90;
             color: #333;
+        }
+    </style>
+    <!-- Safari-Unterstützung für 3D-Transformationen -->
+    <style>
+        @-webkit-keyframes rotateCard {
+            0% { -webkit-transform: perspective(1000px) rotateY(0deg); }
+            100% { -webkit-transform: perspective(1000px) rotateY(360deg); }
+        }
+        
+        .card:hover {
+            -webkit-animation: rotateCard 1s ease forwards;
         }
     </style>
 </head>
