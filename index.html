@@ -35,6 +35,11 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .card:hover {
@@ -57,6 +62,7 @@
         .card-content {
             position: relative;
             z-index: 1;
+            text-align: center;
         }
         
         .test-card {
@@ -121,14 +127,12 @@
     </header>
 
     <main class="container mx-auto p-4">
-        <!-- Navigation Tabs -->
         <div class="mb-6 flex gap-2 overflow-x-auto pb-2">
             <button id="all-tab" class="px-4 py-2 bg-primary text-white rounded-md whitespace-nowrap">Alle</button>
             <button id="games-tab" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Spiele & Tests</button>
             <button id="calc-tab" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Rechner</button>
         </div>
 
-        <!-- Search -->
         <div class="mb-6">
             <div class="relative">
                 <input type="text" id="search" placeholder="Suche..." class="w-full p-2 pl-10 border rounded-md dark:bg-gray-800 dark:border-gray-700 text-base">
@@ -138,309 +142,267 @@
             </div>
         </div>
 
-        <!-- Content container -->
         <div class="flex flex-col">
-            <!-- Left column - Lists of games and calculators -->
             <div class="w-full">
-                <!-- Games Section -->
                 <section id="games-section" class="mb-8">
                     <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-gamepad mr-2 text-primary"></i> Spiele und Tests</h2>
-                    <div id="games-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- Existing game cards -->
+                    <div id="games-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest1" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold">Figurenvergleichstest 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Figurenvergleichstest 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest2" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST1/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold">Figurenvergleichstest 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST1/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Figurenvergleichstest 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST2/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold">Figurenvergleichstest 3</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FIGURENVERGLEICHSTEST2/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Figurenvergleichstest 3</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest1" onclick="window.open('https://zaha175.github.io/FARBENTEST1/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold">Farbentest 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FARBENTEST1/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Farbentest 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest2" onclick="window.open('https://zaha175.github.io/FARBENTEST2/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold">Farbentest 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FARBENTEST2/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Farbentest 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest3" onclick="window.open('https://zaha175.github.io/FARBENTEST3/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold">Farbentest 3</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FARBENTEST3/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Farbentest 3</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbenfigurentest1" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-paint-brush"></i></div>
-                                <h3 class="font-semibold">Farbenfigurentest 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Farbenfigurentest 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbenfigurentest2" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-paint-brush"></i></div>
-                                <h3 class="font-semibold">Farbenfigurentest 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Farbenfigurentest 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest1" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold">Verkehrsituationstest 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/Verkehrssituationstext/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Verkehrsituationstest 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest2" onclick="window.open('https://zaha175.github.io/PUZZLEBILDAPP/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold">Verkehrsituationstest 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/PUZZLEBILDAPP/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Verkehrsituationstest 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest3" onclick="window.open('https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold">Verkehrsituationstest 3</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Verkehrsituationstest 3</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest1" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold">Mehrfachsituationstest 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/MERHFACHSITUATIONSTEST/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest2" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold">Mehrfachsituationstest 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest3" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold">Mehrfachsituationstest 3</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 3</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte1" onclick="window.open('https://zaha175.github.io/GROKFLOTTE1/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 1</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE1/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 1</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte2" onclick="window.open('https://zaha175.github.io/GROKFLOTTE2/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 2</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE2/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 2</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte3" onclick="window.open('https://zaha175.github.io/GROKFLOTTE3/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 3</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE3/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 3</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte4" onclick="window.open('https://zaha175.github.io/GROKFLOTTE4/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 4</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE4/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 4</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte5" onclick="window.open('https://zaha175.github.io/GROKFLOTTE5/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 5</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE5/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 5</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte6" onclick="window.open('https://zaha175.github.io/GROKFLOTTE6/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 6</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE6/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 6</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte7" onclick="window.open('https://zaha175.github.io/GROKFLOTTE7/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 7</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE7/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 7</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte8" onclick="window.open('https://zaha175.github.io/GROKFLOTTE8/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 8</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE8/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 8</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte9" onclick="window.open('https://zaha175.github.io/GROKFLOTTE9/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 9</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE9/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 9</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte10" onclick="window.open('https://zaha175.github.io/GROKFLOTTE10/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 10</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE10/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 10</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GROKFLOTTE11/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold">Grokflotte 11</h3>
-                                <p class="text-sm text-gray-200">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKFLOTTE11/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grokflotte 11</h3>
+                                <p class="text-xs text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest1" onclick="window.open('https://zaha175.github.io/Reaktionstest0/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold">Reaktionstest 1</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/Reaktionstest0/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Reaktionstest 1</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest2" onclick="window.open('https://zaha175.github.io/Reaktionstest2/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold">Reaktionstest 2</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/Reaktionstest2/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Reaktionstest 2</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest3" onclick="window.open('https://zaha175.github.io/Reaktionstest3NEU/', '_blank')">
                             <div class="card-content">
                                 <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold">Reaktionstest 3</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Test</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/Reaktionstest3NEU/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Reaktionstest 3</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Test</p>
                             </div>
                         </div>
                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="steinpapierschere" onclick="window.open('https://zaha175.github.io/STEINPAPIERSCHERE/', '_blank')">
                             <div class="card-content">
                                 <div class="text-green-500 text-2xl mb-2"><i class="fas fa-hand-rock"></i></div>
-                                <h3 class="font-semibold">Stein Papier Schere</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Spiel</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/STEINPAPIERSCHERE/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Stein Papier Schere</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
                             </div>
                         </div>
-                        <!-- Neue Spielkarten -->
                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG/', '_blank')">
                             <div class="card-content">
                                 <div class="text-green-500 text-2xl mb-2"><i class="fas fa-table-tennis"></i></div>
-                                <h3 class="font-semibold">Pong</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Spiel</p>
+                                <h3 class="font-semibold text-sm">Pong</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
                             </div>
                         </div>
                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="grokssnake" onclick="window.open('https://zaha175.github.io/GROKSSNAKE/', '_blank')">
                             <div class="card-content">
                                 <div class="text-green-500 text-2xl mb-2"><i class="fas fa-snake"></i></div>
-                                <h3 class="font-semibold">Grok's Snake</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Spiel</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/GROKSSNAKE/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Grok's Snake</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
                             </div>
                         </div>
                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="tetrix1" onclick="window.open('https://zaha175.github.io/TETRIX1/', '_blank')">
                             <div class="card-content">
                                 <div class="text-green-500 text-2xl mb-2"><i class="fas fa-cube"></i></div>
-                                <h3 class="font-semibold">Tetrix 1</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Spiel</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/TETRIX1/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Tetrix 1</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
                             </div>
                         </div>
                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="tetrix" onclick="window.open('https://zaha175.github.io/TETRIX/', '_blank')">
                             <div class="card-content">
                                 <div class="text-green-500 text-2xl mb-2"><i class="fas fa-cube"></i></div>
-                                <h3 class="font-semibold">Tetrix</h3>
-                                <p class="text-sm text-gray-700">Kategorie: Spiel</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/TETRIX/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Tetrix</h3>
+                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Calculators Section -->
                 <section id="calc-section" class="mb-8">
                     <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-calculator mr-2 text-primary"></i> Rechner</h2>
-                    <div id="calc-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- Existing calculator cards -->
+                    <div id="calc-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         <div class="card health-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="alkoholkonsumrechner" onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')">
                             <div class="card-content">
                                 <div class="text-pink-500 text-2xl mb-2"><i class="fas fa-wine-glass"></i></div>
-                                <h3 class="font-semibold">Alkoholkonsum-Rechner</h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/MENGENACHPROMILLE/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Alkoholkonsum-Rechner</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
                             </div>
                         </div>
                         <div class="card health-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="promillerechner" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">
                             <div class="card-content">
                                 <div class="text-pink-500 text-2xl mb-2"><i class="fas fa-wine-bottle"></i></div>
-                                <h3 class="font-semibold">Promille-Rechner</h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/PROMILLERECHNERDE/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Promille-Rechner</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
                             </div>
                         </div>
                         <div class="card utility-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="lebensalterrechner" onclick="window.open('https://zaha175.github.io/LEBENSALTER-RECHNER/', '_blank')">
                             <div class="card-content">
                                 <div class="text-blue-500 text-2xl mb-2"><i class="fas fa-birthday-cake"></i></div>
-                                <h3 class="font-semibold">Lebensalter-Rechner</h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Kategorie: Utility</p>
-                                <iframe class="w-full h-10 mt-2 rounded-md" src="https://zaha175.github.io/LEBENSALTER-RECHNER/" loading="lazy"></iframe>
+                                <h3 class="font-semibold text-sm">Lebensalter-Rechner</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Utility</p>
                             </div>
                         </div>
                     </div>
@@ -456,7 +418,6 @@
     </footer>
 
     <script>
-        // Dark mode toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -474,7 +435,6 @@
             localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
         });
         
-        // Tab navigation
         const allTab = document.getElementById('all-tab');
         const gamesTab = document.getElementById('games-tab');
         const calcTab = document.getElementById('calc-tab');
@@ -509,7 +469,6 @@
             calcSection.classList.remove('hidden');
         });
         
-        // Search functionality
         const searchInput = document.getElementById('search');
         const cards = document.querySelectorAll('.card');
         
