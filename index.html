@@ -8,11 +8,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
     <script>
+        // Tailwind Configuration
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: 'class', // Enable dark mode based on class
             theme: {
                 extend: {
-                    colors: {
+                    colors: { // Custom color palette
                         primary: '#5D5CDE',
                         game: '#4CAF50',
                         test: '#FF9800',
@@ -30,134 +31,261 @@
         }
     </script>
     <style>
-        /* 3D Rotation Animation */
+        /* 3D Rotation Animation for Cards */
         @keyframes rotateCard {
-            0% { transform: perspective(1000px) rotateY(0deg); }
-            100% { transform: perspective(1000px) rotateY(360deg); }
+            0% { transform: perspective(800px) rotateY(0deg); }
+            100% { transform: perspective(800px) rotateY(360deg); }
         }
-        
+
+        /* Base Card Styling (Smaller, Compact) */
         .card {
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            width: 200px;
-            height: 200px;
+            width: 160px; /* Reduced width */
+            height: 160px; /* Reduced height */
             display: flex;
+            flex-direction: column; /* Stack content vertically */
             align-items: center;
             justify-content: center;
-            transition: box-shadow 0.3s ease;
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateY(0deg);
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            transform-style: preserve-3d; /* Enable 3D transforms */
+            transform: perspective(800px) rotateY(0deg); /* Initial state */
+            padding: 0.75rem; /* Reduced padding (p-3) */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Default shadow */
         }
-        
+
+        /* Improved Card Hover Effect */
         .card:hover {
-            animation: rotateCard 1s ease forwards;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            animation: rotateCard 1s ease forwards; /* Apply rotation */
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+            /* Optional: Subtle lift/tilt - might interfere with rotation visibility */
+            /* transform: scale(1.05) perspective(800px) rotateY(5deg); */
         }
-        
+
+        /* Remove pseudo-element background */
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23bbbbbb' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.7;
-            z-index: 0;
+           content: none;
         }
-        
+
+        /* Card Content Styling */
         .card-content {
             position: relative;
             z-index: 1;
             text-align: center;
-            backface-visibility: hidden;
+            backface-visibility: hidden; /* Hide back during rotation */
             transform-style: preserve-3d;
             width: 100%;
-        }
-        
-        .test-card {
-            border-left: 4px solid #FF9800;
-        }
-        
-        .game-card {
-            border-left: 4px solid #4CAF50;
-        }
-        
-        .health-card {
-            border-left: 4px solid #E91E63;
-        }
-        
-        .utility-card {
-            border-left: 4px solid #2196F3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; /* Fill card height */
         }
 
+        /* Smaller Font Sizes within Cards */
+        .card h3 {
+             font-size: 0.8rem; /* Slightly smaller heading */
+             margin-bottom: 0.25rem; /* Reduced margin */
+             font-weight: 600; /* Tailwind semibold */
+        }
+        .card p {
+            font-size: 0.65rem; /* Smaller category text */
+        }
+        .card .icon-container { /* Use a class for the icon div */
+             font-size: 1.25rem; /* Smaller icon size */
+             margin-bottom: 0.5rem; /* Reduced margin */
+        }
+
+        /* Card Border Indicators */
+        .test-card { border-left: 3px solid #FF9800; }
+        .game-card { border-left: 3px solid #4CAF50; }
+        .health-card { border-left: 3px solid #E91E63; }
+        .utility-card { border-left: 3px solid #2196F3; }
+
+        /* Page Background */
         .main-bg {
-            background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414L74 80.414zm16 0L90 80.414 95.586 86H84.414L90 80.414zm16 0L106 80.414 111.586 86h-11.172L106 80.414zM87.414 91.414L80 84h40l-6.414 6.414-19.586 19.586-1.414 1.414-7.586-7.586 1.414-1.414 5.414-5.414 1.586-1.586z' fill='%235d5cde' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-color: #f7fafc; /* Light mode background */
         }
-
         body.dark .main-bg {
-            background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414L74 80.414zm16 0L90 80.414 95.586 86H84.414L90 80.414zm16 0L106 80.414 111.586 86h-11.172L106 80.414zM87.414 91.414L80 84h40l-6.414 6.414-19.586 19.586-1.414 1.414-7.586-7.586 1.414-1.414 5.414-5.414 1.586-1.586z' fill='%235d5cde' fill-opacity='0.16' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-color: #1a202c; /* Dark mode background */
         }
 
-        .figuren-bg {
-            background-color: #001a33;
-            color: white;
+        /* Specific Card Backgrounds */
+         .figuren-bg { background-color: #001a33; color: white; }
+         .farben-bg { background-color: #cc9900; color: white; }
+         .verkehr-bg { background-color: #003300; color: white; }
+         .mehrfach-bg { background-color: #cc6600; color: white; }
+         .grokflotte-bg { background-color: #660066; color: white; }
+         .reaktion-bg { background-color: #90EE90; color: #333; } /* Light green with dark text */
+         /* Ensure health/utility cards have appropriate text color in dark mode */
+         body.dark .health-card p, body.dark .utility-card p { color: #a0aec0; } /* gray-500 */
+         body.dark .health-card h3, body.dark .utility-card h3 { color: #e2e8f0; } /* gray-200 */
+
+
+        /* Ad Banner Styling */
+        #ad-banner {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 51, 102, 0.8); /* Semi-transparent blue */
+            color: #ffd700; /* Gold text */
+            margin: 10px auto;
+            max-width: 95%; /* Responsive width */
+            border-radius: 5px;
+            border: 1px solid #ffd700; /* Gold border */
+            font-size: 1rem; /* Base font size */
+            font-weight: bold;
+            min-height: 1.5em; /* Ensure space for text */
+            cursor: default;
+            position: relative;
+            overflow: hidden; /* Hide overflowing effects */
+            animation: pulse 3s infinite ease-in-out; /* Pulse animation */
+            z-index: 5; /* Keep banner above cards */
         }
-        .farben-bg {
-            background-color: #cc9900;
-            color: white;
+
+        /* Banner Pulse Animation */
+        @keyframes pulse {
+             0% { box-shadow: 0 0 8px 0px rgba(255, 215, 0, 0.4); }
+             50% { box-shadow: 0 0 16px 4px rgba(255, 215, 0, 0.6); }
+             100% { box-shadow: 0 0 8px 0px rgba(255, 215, 0, 0.4); }
         }
-        .verkehr-bg {
-            background-color: #003300;
-            color: white;
+
+        /* Banner Text Glow Animation */
+        #ad-banner .text-glow {
+            animation: textGlow 2s ease-in-out infinite alternate;
         }
-        .mehrfach-bg {
-            background-color: #cc6600;
-            color: white;
+        @keyframes textGlow {
+            from { text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700; }
+            to { text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 0 0 24px #ff9900; }
         }
-        .grokflotte-bg {
-            background-color: #660066;
-            color: white;
+
+        /* Typing Cursor Styling */
+        .cursor {
+            display: inline-block;
+            width: 2px; /* Thin cursor */
+            height: 1em; /* Match text height */
+            background-color: #ffd700; /* Gold cursor */
+            margin-left: 1px;
+            animation: blink 1s infinite;
+            vertical-align: bottom; /* Align with text baseline */
         }
-        .reaktion-bg {
-            background-color: #90EE90;
-            color: #333;
+        @keyframes blink { /* Cursor blink animation */
+             0%, 49% { opacity: 1; }
+             50%, 100% { opacity: 0; }
         }
-    </style>
-    <!-- Safari-Unterstützung für 3D-Transformationen -->
-    <style>
+
+        /* Dark Mode Banner Variants */
+        body.dark #ad-banner {
+            background-color: rgba(68, 68, 68, 0.8); /* Darker semi-transparent */
+            border-color: #777; /* Gray border */
+            animation: pulseDark 3s infinite ease-in-out; /* Dark pulse */
+        }
+        @keyframes pulseDark { /* Dark mode pulse animation */
+             0% { box-shadow: 0 0 8px 0px rgba(119, 119, 119, 0.4); }
+             50% { box-shadow: 0 0 16px 4px rgba(119, 119, 119, 0.6); }
+             100% { box-shadow: 0 0 8px 0px rgba(119, 119, 119, 0.4); }
+        }
+        body.dark .cursor { background-color: #ddd; } /* Lighter cursor in dark mode */
+
+        /* Pause Banner Animations on Hover */
+        #ad-banner:hover { animation-play-state: paused; }
+        #ad-banner:hover .text-glow { animation-play-state: paused; }
+        /* JS handles cursor blink pause */
+
+        /* Safari 3D Transform Support */
         @-webkit-keyframes rotateCard {
-            0% { -webkit-transform: perspective(1000px) rotateY(0deg); }
-            100% { -webkit-transform: perspective(1000px) rotateY(360deg); }
+            0% { -webkit-transform: perspective(800px) rotateY(0deg); }
+            100% { -webkit-transform: perspective(800px) rotateY(360deg); }
         }
-        
         .card:hover {
             -webkit-animation: rotateCard 1s ease forwards;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 640px) { /* Tailwind's 'sm' breakpoint */
+             .card {
+                  width: calc(50% - 0.5rem); /* Adjust width for 2 columns with gap */
+                  height: 140px; /* Slightly smaller height */
+                  margin-bottom: 0.75rem; /* Add bottom margin for spacing */
+             }
+             #ad-banner {
+                 font-size: 0.9rem; /* Smaller banner font */
+             }
+             /* Adjust card container for mobile */
+             #games-container, #calc-container {
+                 /* Using flexbox for better wrapping control on mobile */
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between; /* Distribute space */
+                 gap: 0; /* Remove grid gap, handle spacing with card margin */
+             }
+             .container {
+                 padding-left: 0.5rem; /* Reduce side padding */
+                 padding-right: 0.5rem;
+             }
+             /* Adjust tab padding/size */
+             .tab-button { /* Add a common class to tab buttons if needed */
+                 padding: 0.5rem 0.75rem;
+                 font-size: 0.875rem;
+             }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) { /* Medium screens */
+             .card {
+                  width: calc(33.33% - 1rem); /* Adjust for 3 columns */
+                  height: 150px;
+                  margin-bottom: 1rem;
+             }
+              #games-container, #calc-container {
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between; /* Or space-around */
+                 gap: 0;
+             }
+        }
+         @media (min-width: 1025px) { /* Larger screens */
+             .card {
+                  width: calc(20% - 0.8rem); /* Adjust for 5 columns, slightly reduced gap */
+                  height: 160px;
+                  /* margin-bottom: 1rem; */ /* Use gap instead */
+             }
+              #games-container, #calc-container {
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: flex-start; /* Align left */
+                 gap: 1rem; /* Use gap for larger screens */
+             }
+         }
+
+
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 main-bg min-h-screen">
     <header class="bg-white dark:bg-gray-800 shadow-md p-4 sticky top-0 z-10">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-primary">Spieleplattform Ultra <span class="text-xs bg-primary text-white px-2 py-1 rounded ml-1">CUB</span></h1>
-            <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+            <h1 class="text-xl md:text-2xl font-bold text-primary">Spieleplattform Ultra <span class="text-xs bg-primary text-white px-2 py-1 rounded ml-1 align-middle">CUB</span></h1>
+            <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary">
                 <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
                 <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                <span class="sr-only">Toggle Dark Mode</span>
             </button>
         </div>
     </header>
 
     <main class="container mx-auto p-4">
-        <div class="mb-6 flex gap-2 overflow-x-auto pb-2">
-            <button id="all-tab" class="px-4 py-2 bg-primary text-white rounded-md whitespace-nowrap">Alle</button>
-            <button id="games-tab" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Spiele & Tests</button>
-            <button id="calc-tab" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Rechner</button>
+        <div id="ad-banner">
+            <span class="text-glow"></span><span class="cursor"></span>
+        </div>
+
+        <div class="mb-6 flex gap-2 overflow-x-auto pb-2 mt-4">
+            <button id="all-tab" class="tab-button px-3 py-1 md:px-4 md:py-2 text-sm md:text-base bg-primary text-white rounded-md whitespace-nowrap">Alle</button>
+            <button id="games-tab" class="tab-button px-3 py-1 md:px-4 md:py-2 text-sm md:text-base bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Spiele & Tests</button>
+            <button id="calc-tab" class="tab-button px-3 py-1 md:px-4 md:py-2 text-sm md:text-base bg-gray-200 dark:bg-gray-700 rounded-md whitespace-nowrap">Rechner</button>
         </div>
 
         <div class="mb-6">
             <div class="relative">
-                <input type="text" id="search" placeholder="Suche..." class="w-full p-2 pl-10 border rounded-md dark:bg-gray-800 dark:border-gray-700 text-base">
+                <input type="text" id="search" placeholder="Suche nach Spielen, Tests oder Rechnern..." class="w-full p-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-800 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-primary dark:focus:border-primary">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400"></i>
                 </div>
@@ -167,485 +295,576 @@
         <div class="flex flex-col">
             <div class="w-full">
                 <section id="games-section" class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-gamepad mr-2 text-primary"></i> Spiele und Tests</h2>
-                    <div id="games-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest1" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">
+                    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center"><i class="fas fa-gamepad mr-2 text-primary"></i> Spiele und Tests</h2>
+                     <div id="games-container" class="flex flex-wrap justify-start gap-4">
+                        <div class="card test-card figuren-bg" data-id="figurenvergleichstest1" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')" title="Figurenvergleichstest 1 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">Figurenvergleichstest 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>Figurenvergleichstest 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest2" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST1/', '_blank')">
+                         <div class="card test-card figuren-bg" data-id="figurenvergleichstest2" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST1/', '_blank')" title="Figurenvergleichstest 2 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">Figurenvergleichstest 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>Figurenvergleichstest 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST2/', '_blank')">
+                         <div class="card test-card figuren-bg" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST2/', '_blank')" title="Figurenvergleichstest 3 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">Figurenvergleichstest 3</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>Figurenvergleichstest 3</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                      <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA/', '_blank')">
+                        <div class="card test-card figuren-bg" data-id="figurenultra" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA/', '_blank')" title="FIGURENULTRA starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>FIGURENULTRA</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                        <div class="card test-card figuren-bg" data-id="figurenultra1" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA1/', '_blank')" title="FIGURENULTRA 1 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>FIGURENULTRA1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                        <div class="card test-card figuren-bg" data-id="figurenultra2" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA2/', '_blank')" title="FIGURENULTRA 2 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
+                                <h3>FIGURENULTRA2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+
+                        <div class="card test-card farben-bg" data-id="farbentest1" onclick="window.open('https://zaha175.github.io/FARBENTEST1/', '_blank')" title="Farbentest 1 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-palette"></i></div>
+                                <h3>Farbentest 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                        <div class="card test-card farben-bg" data-id="farbentest2" onclick="window.open('https://zaha175.github.io/FARBENTEST2/', '_blank')" title="Farbentest 2 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-palette"></i></div>
+                                <h3>Farbentest 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                         <div class="card test-card farben-bg" data-id="farbentestultra2" onclick="window.open('https://zaha175.github.io/FARBENTESTULTRA2/', '_blank')" title="Farbentest ULTRA 2 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-palette"></i></div>
+                                <h3>Farbentest ULTRA 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                        <div class="card test-card farben-bg" data-id="farbentest3" onclick="window.open('https://zaha175.github.io/FARBENTEST3/', '_blank')" title="Farbentest 3 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-palette"></i></div>
+                                <h3>Farbentest 3</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                        <div class="card test-card farben-bg" data-id="farbenfigurentest1" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/', '_blank')" title="Farbenfigurentest 1 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">FIGURENULTRA</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-paint-brush"></i></div>
+                                <h3>Farbenfigurentest 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                       <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA1/', '_blank')">
+                        <div class="card test-card farben-bg" data-id="farbenfigurentest2" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/', '_blank')" title="Farbenfigurentest 2 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">FIGURENULTRA1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-paint-brush"></i></div>
+                                <h3>Farbenfigurentest 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card figuren-bg rounded-lg shadow p-4" data-id="figurenvergleichstest3" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTESTULTRA2/', '_blank')">
+
+                        <div class="card test-card verkehr-bg" data-id="verkehrsituationstest1" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')" title="Verkehrsituationstest 1 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-shapes"></i></div>
-                                <h3 class="font-semibold text-sm">FIGURENULTRA2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-car"></i></div>
+                                <h3>Verkehrsituationstest 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest1" onclick="window.open('https://zaha175.github.io/FARBENTEST1/', '_blank')">
+                        <div class="card test-card verkehr-bg" data-id="verkehrsituationstest2" onclick="window.open('https://zaha175.github.io/PUZZLEBILDAPP/', '_blank')" title="Verkehrsituationstest 2 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-car"></i></div>
+                                <h3>Verkehrsituationstest 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                        </div>
+                         <div class="card test-card verkehr-bg" data-id="verkehrsituationstest3" onclick="window.open('https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/', '_blank')" title="Verkehrsituationstest 3 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold text-sm">Farbentest 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-car"></i></div>
+                                <h3>Verkehrsituationstest 3</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest2" onclick="window.open('https://zaha175.github.io/FARBENTEST2/', '_blank')">
+
+                        <div class="card test-card mehrfach-bg" data-id="merhfachsituationstest1" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')" title="Mehrfachsituationstest 1 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold text-sm">Farbentest 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-tasks"></i></div>
+                                <h3>Mehrfachsituationstest 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                          <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest2" onclick="window.open('https://zaha175.github.io/FARBENTESTULTRA2/', '_blank')">
+                         <div class="card test-card mehrfach-bg" data-id="merhfachsituationstest2" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/', '_blank')" title="Mehrfachsituationstest 2 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold text-sm">Farbentest ULTRA 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-tasks"></i></div>
+                                <h3>Mehrfachsituationstest 2</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbentest3" onclick="window.open('https://zaha175.github.io/FARBENTEST3/', '_blank')">
+                        <div class="card test-card mehrfach-bg" data-id="merhfachsituationstest3" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/', '_blank')" title="Mehrfachsituationstest 3 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-palette"></i></div>
-                                <h3 class="font-semibold text-sm">Farbentest 3</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-tasks"></i></div>
+                                <h3>Mehrfachsituationstest 3</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbenfigurentest1" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTESTULTRA/', '_blank')">
+
+                        <div class="card test-card reaktion-bg" data-id="reaktionstest1" onclick="window.open('https://zaha175.github.io/Reaktionstest0/', '_blank')" title="Reaktionstest 1 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-bolt"></i></div>
+                                <h3>Reaktionstest 1</h3>
+                                <p class="text-gray-700">Kategorie: Test</p>
+                             </div>
+                        </div>
+                         <div class="card test-card reaktion-bg" data-id="reaktionstest2" onclick="window.open('https://zaha175.github.io/Reaktionstest2/', '_blank')" title="Reaktionstest 2 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-paint-brush"></i></div>
-                                <h3 class="font-semibold text-sm">Farbenfigurentest 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-bolt"></i></div>
+                                <h3>Reaktionstest 2</h3>
+                                <p class="text-gray-700">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card farben-bg rounded-lg shadow p-4" data-id="farbenfigurentest2" onclick="window.open('https://zaha175.github.io/FARBFIGURENVERGLEICHSTEST3DULTRA/', '_blank')">
+                         <div class="card test-card reaktion-bg" data-id="reaktionstest3" onclick="window.open('https://zaha175.github.io/Reaktionstest3NEU/', '_blank')" title="Reaktionstest 3 starten">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-paint-brush"></i></div>
-                                <h3 class="font-semibold text-sm">Farbenfigurentest 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-orange-500"><i class="fas fa-bolt"></i></div>
+                                <h3>Reaktionstest 3</h3>
+                                <p class="text-gray-700">Kategorie: Test</p>
                             </div>
                         </div>
-                        <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest1" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold text-sm">Verkehrsituationstest 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
+
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte1" onclick="window.open('https://zaha175.github.io/GROKFLOTTE1/', '_blank')" title="Grokflotte 1 starten">
+                             <div class="card-content">
+                                <div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div>
+                                <h3>Grokflotte 1</h3>
+                                <p class="text-gray-200">Kategorie: Test</p>
+                             </div>
+                         </div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte2" onclick="window.open('https://zaha175.github.io/GROKFLOTTE2/', '_blank')" title="Grokflotte 2 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 2</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte3" onclick="window.open('https://zaha175.github.io/GROKFLOTTE3/', '_blank')" title="Grokflotte 3 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 3</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte4" onclick="window.open('https://zaha175.github.io/GROKFLOTTE4/', '_blank')" title="Grokflotte 4 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 4</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte5" onclick="window.open('https://zaha175.github.io/GROKFLOTTE5/', '_blank')" title="Grokflotte 5 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 5</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte6" onclick="window.open('https://zaha175.github.io/GROKFLOTTE6/', '_blank')" title="Grokflotte 6 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 6</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte7" onclick="window.open('https://zaha175.github.io/GROKFLOTTE7/', '_blank')" title="Grokflotte 7 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 7</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte8" onclick="window.open('https://zaha175.github.io/GROKFLOTTE8/', '_blank')" title="Grokflotte 8 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 8</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte9" onclick="window.open('https://zaha175.github.io/GROKFLOTTE9/', '_blank')" title="Grokflotte 9 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 9</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte10" onclick="window.open('https://zaha175.github.io/GROKFLOTTE10/', '_blank')" title="Grokflotte 10 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 10</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GROKFLOTTE11/', '_blank')" title="Grokflotte 11 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-ship"></i></div><h3>Grokflotte 11</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+
+
+                         <div class="card test-card grokflotte-bg" data-id="galagaultra" onclick="window.open('https://zaha175.github.io/GALAGAULTRA/', '_blank')" title="GALAGAULTRA starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-space-shuttle"></i></div><h3>GALAGAULTRA</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="galagaultra1" onclick="window.open('https://zaha175.github.io/GALAGAULTRA1/', '_blank')" title="GALAGAULTRA 1 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-space-shuttle"></i></div><h3>GALAGAULTRA1</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="galagaultra2" onclick="window.open('https://zaha175.github.io/GALAGAULTRA2/', '_blank')" title="GALAGAULTRA 2 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-space-shuttle"></i></div><h3>GALAGAULTRA2</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="doom" onclick="window.open('https://zaha175.github.io/DOOM/', '_blank')" title="DOOM starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-crosshairs"></i></div><h3>DOOM</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="doom1" onclick="window.open('https://zaha175.github.io/DOOM1/', '_blank')" title="DOOM 1 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-crosshairs"></i></div><h3>DOOM1</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+                         <div class="card test-card grokflotte-bg" data-id="doom2" onclick="window.open('https://zaha175.github.io/DOOM2/', '_blank')" title="DOOM 2 starten"> <div class="card-content"><div class="icon-container text-orange-500"><i class="fas fa-crosshairs"></i></div><h3>DOOM2</h3><p class="text-gray-200">Kategorie: Test</p></div></div>
+
+                         <div class="card game-card reaktion-bg" data-id="steinpapierschere" onclick="window.open('https://zaha175.github.io/STEINPAPIERSCHERE/', '_blank')" title="Stein Papier Schere spielen">
+                             <div class="card-content">
+                                <div class="icon-container text-green-500"><i class="fas fa-hand-rock"></i></div>
+                                <h3>Stein Papier Schere</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
+                             </div>
                         </div>
-                        <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest2" onclick="window.open('https://zaha175.github.io/PUZZLEBILDAPP/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold text-sm">Verkehrsituationstest 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
+                        <div class="card game-card reaktion-bg" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG/', '_blank')" title="Pong spielen">
+                             <div class="card-content">
+                                <div class="icon-container text-green-500"><i class="fas fa-table-tennis"></i></div>
+                                <h3>Pong</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
+                             </div>
                         </div>
-                        <div class="card test-card verkehr-bg rounded-lg shadow p-4" data-id="verkehrsituationstest3" onclick="window.open('https://zaha175.github.io/PUZZLEVERKEHRSBILD3D/', '_blank')">
+                         <div class="card game-card reaktion-bg" data-id="pong1" onclick="window.open('https://zaha175.github.io/PONG1/', '_blank')" title="Pong 1 spielen"> <div class="card-content"><div class="icon-container text-green-500"><i class="fas fa-table-tennis"></i></div><h3>Pong1</h3><p class="text-gray-700">Kategorie: Spiel</p></div></div>
+                         <div class="card game-card reaktion-bg" data-id="pong2" onclick="window.open('https://zaha175.github.io/PONG2/', '_blank')" title="Pong 2 spielen"> <div class="card-content"><div class="icon-container text-green-500"><i class="fas fa-table-tennis"></i></div><h3>Pong2</h3><p class="text-gray-700">Kategorie: Spiel</p></div></div>
+                         <div class="card game-card reaktion-bg" data-id="pong3" onclick="window.open('https://zaha175.github.io/PONG3/', '_blank')" title="Pong 3 spielen"> <div class="card-content"><div class="icon-container text-green-500"><i class="fas fa-table-tennis"></i></div><h3>Pong3</h3><p class="text-gray-700">Kategorie: Spiel</p></div></div>
+                         <div class="card game-card reaktion-bg" data-id="grokssnake" onclick="window.open('https://zaha175.github.io/GROKSSNAKE/', '_blank')" title="Grok's Snake spielen">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-car"></i></div>
-                                <h3 class="font-semibold text-sm">Verkehrsituationstest 3</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-green-500"><i class="fas fa-snake"></i></div>
+                                <h3>Grok's Snake</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
                             </div>
-                        </div>
-                        <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest1" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')">
+                         </div>
+                         <div class="card game-card reaktion-bg" data-id="moduleverbinden" onclick="window.open('https://zaha175.github.io/WESTWORLDMODULEVERBINDEN/', '_blank')" title="MODULEVERBINDEN spielen"> <div class="card-content"><div class="icon-container text-green-500"><i class="fas fa-puzzle-piece"></i></div><h3>MODULEVERBINDEN</h3><p class="text-gray-700">Kategorie: Spiel</p></div></div>
+                         <div class="card game-card reaktion-bg" data-id="moduleverbinden1" onclick="window.open('https://zaha175.github.io/WESTWORLDMODULEULTRA/', '_blank')" title="MODULEVERBINDEN 1 spielen"> <div class="card-content"><div class="icon-container text-green-500"><i class="fas fa-puzzle-piece"></i></div><h3>MODULEVERBINDEN1</h3><p class="text-gray-700">Kategorie: Spiel</p></div></div>
+                         <div class="card game-card reaktion-bg" data-id="breakoutultra" onclick="window.open('https://zaha175.github.io/BREAKOUTULTRA/', '_blank')" title="Breakout Ultra spielen">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-green-500"><i class="fas fa-gamepad"></i></div>
+                                <h3>Breakout Ultra</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
                             </div>
-                        </div>
-                        <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest2" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/', '_blank')">
+                         </div>
+                         <div class="card game-card reaktion-bg" data-id="tetrix1" onclick="window.open('https://zaha175.github.io/TETRIX1/', '_blank')" title="Tetrix 1 spielen">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-green-500"><i class="fas fa-cube"></i></div>
+                                <h3>Tetrix 1</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
                             </div>
-                        </div>
-                        <div class="card test-card mehrfach-bg rounded-lg shadow p-4" data-id="merhfachsituationstest3" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/', '_blank')">
+                         </div>
+                         <div class="card game-card reaktion-bg" data-id="tetrix" onclick="window.open('https://zaha175.github.io/TETRIX/', '_blank')" title="Tetrix spielen">
                             <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-tasks"></i></div>
-                                <h3 class="font-semibold text-sm">Mehrfachsituationstest 3</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
+                                <div class="icon-container text-green-500"><i class="fas fa-cube"></i></div>
+                                <h3>Tetrix</h3>
+                                <p class="text-gray-700">Kategorie: Spiel</p>
                             </div>
-                        </div>
-                        <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest1" onclick="window.open('https://zaha175.github.io/Reaktionstest0/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold text-sm">Reaktionstest 1</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest2" onclick="window.open('https://zaha175.github.io/Reaktionstest2/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold text-sm">Reaktionstest 2</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card reaktion-bg rounded-lg shadow p-4" data-id="reaktionstest3" onclick="window.open('https://zaha175.github.io/Reaktionstest3NEU/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-bolt"></i></div>
-                                <h3 class="font-semibold text-sm">Reaktionstest 3</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte1" onclick="window.open('https://zaha175.github.io/GROKFLOTTE1/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte2" onclick="window.open('https://zaha175.github.io/GROKFLOTTE2/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte3" onclick="window.open('https://zaha175.github.io/GROKFLOTTE3/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 3</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte4" onclick="window.open('https://zaha175.github.io/GROKFLOTTE4/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 4</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte5" onclick="window.open('https://zaha175.github.io/GROKFLOTTE5/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 5</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte6" onclick="window.open('https://zaha175.github.io/GROKFLOTTE6/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 6</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte7" onclick="window.open('https://zaha175.github.io/GROKFLOTTE7/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 7</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte8" onclick="window.open('https://zaha175.github.io/GROKFLOTTE8/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 8</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte9" onclick="window.open('https://zaha175.github.io/GROKFLOTTE9/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 9</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte10" onclick="window.open('https://zaha175.github.io/GROKFLOTTE10/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 10</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GROKFLOTTE11/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">Grokflotte 11</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GALAGAULTRA/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">GALAGAULTRA</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GALAGAULTRA1/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">GALAGAULTRA1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/GALAGAULTRA2/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">GALAGAULTRA2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                         <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/DOOM/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">DOOM</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                       <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/DOOM1/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">DOOM1</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card test-card grokflotte-bg rounded-lg shadow p-4" data-id="grokflotte11" onclick="window.open('https://zaha175.github.io/DOOM2/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-orange-500 text-2xl mb-2"><i class="fas fa-ship"></i></div>
-                                <h3 class="font-semibold text-sm">DOOM2</h3>
-                                <p class="text-xs text-gray-200">Kategorie: Test</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="steinpapierschere" onclick="window.open('https://zaha175.github.io/STEINPAPIERSCHERE/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-hand-rock"></i></div>
-                                <h3 class="font-semibold text-sm">Stein Papier Schere</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-table-tennis"></i></div>
-                                <h3 class="font-semibold text-sm">Pong</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG1/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-table-tennis"></i></div>
-                                <h3 class="font-semibold text-sm">Pong1</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                         <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG2/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-table-tennis"></i></div>
-                                <h3 class="font-semibold text-sm">Pong2</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="pong" onclick="window.open('https://zaha175.github.io/PONG3/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-table-tennis"></i></div>
-                                <h3 class="font-semibold text-sm">Pong3</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="grokssnake" onclick="window.open('https://zaha175.github.io/GROKSSNAKE/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-snake"></i></div>
-                                <h3 class="font-semibold text-sm">Grok's Snake</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                       <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="grokssnake" onclick="window.open('https://zaha175.github.io/WESTWORLDMODULEVERBINDEN/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-snake"></i></div>
-                                <h3 class="font-semibold text-sm">MODULEVERBINDEN</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                       <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="grokssnake" onclick="window.open('https://zaha175.github.io/WESTWORLDMODULEULTRA/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-snake"></i></div>
-                                <h3 class="font-semibold text-sm">MODULEVERBINDEN1</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="breakoutultra" onclick="window.open('https://zaha175.github.io/BREAKOUTULTRA/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-gamepad"></i></div>
-                                <h3 class="font-semibold text-sm">Breakout Ultra</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="tetrix1" onclick="window.open('https://zaha175.github.io/TETRIX1/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-cube"></i></div>
-                                <h3 class="font-semibold text-sm">Tetrix 1</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
-                        <div class="card game-card reaktion-bg rounded-lg shadow p-4" data-id="tetrix" onclick="window.open('https://zaha175.github.io/TETRIX/', '_blank')">
-                            <div class="card-content">
-                                <div class="text-green-500 text-2xl mb-2"><i class="fas fa-cube"></i></div>
-                                <h3 class="font-semibold text-sm">Tetrix</h3>
-                                <p class="text-xs text-gray-700">Kategorie: Spiel</p>
-                            </div>
-                        </div>
+                         </div>
                     </div>
                 </section>
 
                 <section id="calc-section" class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-calculator mr-2 text-primary"></i> Rechner</h2>
-                    <div id="calc-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div class="card health-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="alkoholkonsumrechner" onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')">
+                    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center"><i class="fas fa-calculator mr-2 text-primary"></i> Rechner</h2>
+                    <div id="calc-container" class="flex flex-wrap justify-start gap-4">
+                        <div class="card health-card bg-white dark:bg-gray-800" data-id="alkoholkonsumrechner" onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')" title="Alkoholkonsum-Rechner öffnen">
                             <div class="card-content">
-                                <div class="text-pink-500 text-2xl mb-2"><i class="fas fa-wine-glass"></i></div>
-                                <h3 class="font-semibold text-sm">Alkoholkonsum-Rechner</h3>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
+                                <div class="icon-container text-pink-500"><i class="fas fa-wine-glass"></i></div>
+                                <h3>Alkoholkonsum-Rechner</h3>
+                                <p class="text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
                             </div>
                         </div>
-                        <div class="card health-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="promillerechner" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">
+                        <div class="card health-card bg-white dark:bg-gray-800" data-id="promillerechner" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')" title="Promille-Rechner öffnen">
                             <div class="card-content">
-                                <div class="text-pink-500 text-2xl mb-2"><i class="fas fa-wine-bottle"></i></div>
-                                <h3 class="font-semibold text-sm">Promille-Rechner</h3>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
+                                <div class="icon-container text-pink-500"><i class="fas fa-wine-bottle"></i></div>
+                                <h3>Promille-Rechner</h3>
+                                <p class="text-gray-500 dark:text-gray-400">Kategorie: Gesundheit</p>
                             </div>
                         </div>
-                        <div class="card utility-card bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-id="lebensalterrechner" onclick="window.open('https://zaha175.github.io/LEBENSALTER-RECHNER/', '_blank')">
+                        <div class="card utility-card bg-white dark:bg-gray-800" data-id="lebensalterrechner" onclick="window.open('https://zaha175.github.io/LEBENSALTER-RECHNER/', '_blank')" title="Lebensalter-Rechner öffnen">
                             <div class="card-content">
-                                <div class="text-blue-500 text-2xl mb-2"><i class="fas fa-birthday-cake"></i></div>
-                                <h3 class="font-semibold text-sm">Lebensalter-Rechner</h3>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Kategorie: Utility</p>
+                                <div class="icon-container text-blue-500"><i class="fas fa-birthday-cake"></i></div>
+                                <h3>Lebensalter-Rechner</h3>
+                                <p class="text-gray-500 dark:text-gray-400">Kategorie: Utility</p>
                             </div>
                         </div>
                     </div>
                 </section>
+                 <div id="no-results-container"></div>
             </div>
         </div>
     </main>
 
     <footer class="bg-white dark:bg-gray-800 py-4 border-t border-gray-200 dark:border-gray-700 mt-8">
-        <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+        <div class="container mx-auto px-4 text-center text-sm text-gray-600 dark:text-gray-400">
             <p>© 2025 Spieleplattform Ultra</p>
         </div>
     </footer>
 
     <script>
+        // --- DOM Element References ---
         const darkModeToggle = document.getElementById('darkModeToggle');
-        
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.documentElement.classList.add('dark');
-        } else if (localStorage.getItem('darkMode') === 'false') {
-            document.documentElement.classList.remove('dark');
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
-        });
-        
+        const docElement = document.documentElement;
+        const bodyElement = document.body; // Reference body for class toggling
         const allTab = document.getElementById('all-tab');
         const gamesTab = document.getElementById('games-tab');
         const calcTab = document.getElementById('calc-tab');
         const gamesSection = document.getElementById('games-section');
         const calcSection = document.getElementById('calc-section');
-        
+        const gamesContainer = document.getElementById('games-container'); // Container for game cards
+        const calcContainer = document.getElementById('calc-container'); // Container for calc cards
+        const noResultsContainer = document.getElementById('no-results-container'); // Dedicated container for message
+        const tabs = [allTab, gamesTab, calcTab];
+        const searchInput = document.getElementById('search');
+        const allCards = document.querySelectorAll('.card'); // Select all cards initially
+        const adBanner = document.getElementById("ad-banner");
+        const textGlowElement = document.querySelector("#ad-banner .text-glow");
+        const cursorElement = document.querySelector("#ad-banner .cursor");
+
+        // --- State Variables ---
+        let noResultsDiv = null; // To hold the 'no results' message div
+        let typeTimeout;
+        let eraseTimeout;
+        let nextTextTimeout;
+        let isTypingPaused = false;
+        let currentAdIndex = 0;
+
+        // --- Ad Banner Messages ---
+        const adMessages = [
+            "Spieleplattform Ultra: Alle Spiele und Tests im Vergleich!",
+            "🚀 SPIELE UND TEST ZENTRALE: Dein All-in-One-Tool für alle Bereiche!",
+            "🎮 Neue Reaktionstests und Spiele jetzt verfügbar!",
+            "🧠 Fordere dich heraus: Kognitive Tests für jedes Level!",
+            "💡 Entdecke nützliche Rechner für den Alltag!"
+        ];
+
+        // --- Functions ---
+
+        /**
+         * Applies the selected theme (dark/light) to the document and saves preference.
+         * @param {boolean} isDark - True if dark mode should be applied, false otherwise.
+         */
+        function applyTheme(isDark) {
+          docElement.classList.toggle('dark', isDark);
+          bodyElement.classList.toggle('dark', isDark); // Toggle on body as well
+          localStorage.setItem('darkMode', isDark);
+        }
+
+        /**
+         * Updates the visual state of the navigation tabs.
+         * @param {HTMLElement} activeTab - The tab element that should be marked active.
+         */
         function updateTabs(activeTab) {
-            [allTab, gamesTab, calcTab].forEach(tab => {
+            tabs.forEach(tab => {
                 tab.classList.remove('bg-primary', 'text-white');
                 tab.classList.add('bg-gray-200', 'dark:bg-gray-700');
             });
-            
             activeTab.classList.remove('bg-gray-200', 'dark:bg-gray-700');
             activeTab.classList.add('bg-primary', 'text-white');
         }
-        
-        allTab.addEventListener('click', () => {
-            updateTabs(allTab);
-            gamesSection.classList.remove('hidden');
-            calcSection.classList.remove('hidden');
-        });
-        
-        gamesTab.addEventListener('click', () => {
-            updateTabs(gamesTab);
-            gamesSection.classList.remove('hidden');
-            calcSection.classList.add('hidden');
-        });
-        
-        calcTab.addEventListener('click', () => {
-            updateTabs(calcTab);
-            gamesSection.classList.add('hidden');
-            calcSection.classList.remove('hidden');
-        });
-        
-        const searchInput = document.getElementById('search');
-        const cards = document.querySelectorAll('.card');
-        
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            let hasVisibleGames = false;
-            let hasVisibleCalcs = false;
-            
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const isVisible = title.includes(searchTerm);
-                card.classList.toggle('hidden', !isVisible);
-                
-                if (isVisible) {
-                    if (card.closest('#games-container')) {
-                        hasVisibleGames = true;
-                    } else if (card.closest('#calc-container')) {
-                        hasVisibleCalcs = true;
-                    }
-                }
-            });
-            
-            gamesSection.classList.toggle('hidden', !hasVisibleGames);
-            calcSection.classList.toggle('hidden', !hasVisibleCalcs);
-            
-            if (!hasVisibleGames && !hasVisibleCalcs) {
-                if (!document.getElementById('no-results')) {
-                    const noResults = document.createElement('div');
-                    noResults.id = 'no-results';
-                    noResults.className = 'text-center py-8 text-gray-500 dark:text-gray-400';
-                    noResults.innerHTML = `
-                        <i class="fas fa-search fa-3x mb-3"></i>
-                        <p class="text-lg">Keine Ergebnisse gefunden.</p>
-                    `;
-                    document.querySelector('main').appendChild(noResults);
-                }
-            } else {
-                const noResults = document.getElementById('no-results');
-                if (noResults) {
-                    noResults.remove();
+
+        /**
+         * Filters the visible cards based on search term and active tab.
+         * @param {string} searchTerm - The term to filter by.
+         */
+        function filterCards(searchTerm) {
+             searchTerm = searchTerm.toLowerCase();
+             let hasVisibleGames = false;
+             let hasVisibleCalcs = false;
+             const currentActiveTab = document.querySelector('#all-tab.bg-primary, #games-tab.bg-primary, #calc-tab.bg-primary');
+
+             allCards.forEach(card => {
+                 const titleElement = card.querySelector('h3'); // Get the h3 element
+                 // Ensure titleElement exists before accessing textContent
+                 const title = titleElement ? titleElement.textContent.toLowerCase() : '';
+
+                 const categoryTag = card.querySelector('p');
+                 // Check if categoryTag exists before accessing textContent
+                 const category = categoryTag ? categoryTag.textContent.toLowerCase() : '';
+                 const cardIsGameOrTest = card.closest('#games-section') !== null;
+                 const cardIsCalc = card.closest('#calc-section') !== null;
+
+                 // Card is potentially visible if title or category matches search term
+                 let isPotentiallyVisible = title.includes(searchTerm) || category.includes(searchTerm);
+
+                 // Final visibility depends on potential visibility AND active tab
+                 let isVisible = false;
+                 if (isPotentiallyVisible) {
+                     if (currentActiveTab === allTab) {
+                         isVisible = true;
+                     } else if (currentActiveTab === gamesTab && cardIsGameOrTest) {
+                         isVisible = true;
+                     } else if (currentActiveTab === calcTab && cardIsCalc) {
+                         isVisible = true;
+                     }
+                 }
+
+                 card.classList.toggle('hidden', !isVisible);
+
+                 // Track if any cards are visible within each section
+                 if (isVisible) {
+                     if (cardIsGameOrTest) hasVisibleGames = true;
+                     if (cardIsCalc) hasVisibleCalcs = true;
+                 }
+             });
+
+             // Show/hide entire sections based on whether *any* card within them is visible *for the current filter*
+             // Hide section only if the specific tab is active AND no cards are visible
+             gamesSection.classList.toggle('hidden', !hasVisibleGames && currentActiveTab === gamesTab);
+             calcSection.classList.toggle('hidden', !hasVisibleCalcs && currentActiveTab === calcTab);
+             // Special case: If 'All' is active, show sections if they have *any* visible cards matching the search
+             if (currentActiveTab === allTab) {
+                 gamesSection.classList.toggle('hidden', !hasVisibleGames);
+                 calcSection.classList.toggle('hidden', !hasVisibleCalcs);
+             }
+
+
+             // --- Handle "No results" message ---
+             // Show message if search is active AND no cards are visible for the current tab filter
+             const noResultsVisible = (currentActiveTab === allTab && !hasVisibleGames && !hasVisibleCalcs && searchTerm !== '') ||
+                                      (currentActiveTab === gamesTab && !hasVisibleGames && searchTerm !== '') ||
+                                      (currentActiveTab === calcTab && !hasVisibleCalcs && searchTerm !== '');
+
+             if (noResultsVisible) {
+                 if (!noResultsDiv) { // Create the div if it doesn't exist
+                     noResultsDiv = document.createElement('div');
+                     noResultsDiv.id = 'no-results';
+                     // Apply centering and text styles
+                     noResultsDiv.className = 'text-center py-12 text-gray-500 dark:text-gray-400 w-full';
+                     noResultsDiv.innerHTML = `
+                         <i class="fas fa-search fa-3x mb-4 opacity-50"></i>
+                         <p class="text-lg font-semibold">Keine Ergebnisse gefunden</p>
+                         <p class="text-sm">Für "" wurden keine Einträge gefunden.</p>
+                     `;
+                     noResultsContainer.appendChild(noResultsDiv); // Append to the dedicated container
+                 }
+                 noResultsDiv.classList.remove('hidden'); // Make sure it's visible
+                 // Update the search term in the message safely
+                 const searchTermElement = noResultsDiv.querySelector('.text-sm');
+                 if (searchTermElement) {
+                    searchTermElement.textContent = `Für "${searchInput.value}" wurden keine Einträge gefunden.`;
+                 }
+             } else if (noResultsDiv) {
+                 noResultsDiv.classList.add('hidden'); // Hide the message if there are results or search is empty
+             }
+        }
+
+        /**
+         * Simulates a typewriter effect for the ad banner.
+         * @param {HTMLElement} textElement - The element to display the text in.
+         * @param {HTMLElement} cursorElement - The cursor element.
+         * @param {string} text - The text to type.
+         * @param {number} speed - Typing speed in milliseconds.
+         * @param {function} callback - Function to call after typing and erasing.
+         */
+        function typeWriter(textElement, cursorElement, text, speed = 60, callback) {
+            clearTimeout(typeTimeout);
+            clearTimeout(eraseTimeout);
+            clearTimeout(nextTextTimeout);
+
+            let i = 0;
+            textElement.innerHTML = ""; // Clear previous text
+            cursorElement.style.display = "inline-block"; // Show cursor
+            cursorElement.style.animationPlayState = "running"; // Start blinking
+
+            function typing() {
+                if (isTypingPaused) return; // Stop if paused by hover
+                if (i < text.length) {
+                    textElement.innerHTML += text.charAt(i);
+                    i++;
+                    typeTimeout = setTimeout(typing, speed); // Schedule next character
+                } else {
+                    cursorElement.style.animationPlayState = "paused"; // Pause cursor blink at end
+                    // Wait 3 seconds after typing finishes, then start erasing
+                    eraseTimeout = setTimeout(() => {
+                         if (!isTypingPaused) eraseText(textElement, cursorElement, speed / 2, callback);
+                     }, 3000);
                 }
             }
+            typing(); // Start the typing process
+         }
+
+        /**
+         * Simulates erasing text in the ad banner.
+         * @param {HTMLElement} textElement - The element containing the text.
+         * @param {HTMLElement} cursorElement - The cursor element.
+         * @param {number} speed - Erasing speed in milliseconds.
+         * @param {function} callback - Function to call after erasing finishes.
+         */
+         function eraseText(textElement, cursorElement, speed, callback) {
+             clearTimeout(eraseTimeout);
+             cursorElement.style.animationPlayState = "running"; // Resume blinking
+
+             function erasing() {
+                 if (isTypingPaused) return; // Stop if paused by hover
+                 if (textElement.innerHTML.length > 0) {
+                     textElement.innerHTML = textElement.innerHTML.slice(0, -1); // Remove last character
+                     eraseTimeout = setTimeout(erasing, speed); // Schedule next erase step
+                 } else {
+                      cursorElement.style.display = "none"; // Hide cursor when text is empty
+                      // Wait briefly before calling the callback (e.g., nextText)
+                      if (callback) {
+                           nextTextTimeout = setTimeout(() => {
+                               if (!isTypingPaused) callback();
+                           }, 500); // 0.5 second pause
+                      }
+                 }
+             }
+             erasing(); // Start the erasing process
+         }
+
+        /**
+         * Loads the next message in the ad banner sequence.
+         */
+        function nextText() {
+            currentAdIndex = (currentAdIndex + 1) % adMessages.length; // Cycle through messages
+            typeWriter(textGlowElement, cursorElement, adMessages[currentAdIndex], 60, nextText); // Start typing next message
+        }
+
+        // --- Event Listeners ---
+
+        // Dark Mode Toggle Button
+        darkModeToggle.addEventListener('click', () => {
+            applyTheme(!docElement.classList.contains('dark'));
         });
+
+        // Tab Navigation Buttons
+        allTab.addEventListener('click', () => {
+            updateTabs(allTab);
+            filterCards(searchInput.value); // Re-filter based on current search
+        });
+        gamesTab.addEventListener('click', () => {
+            updateTabs(gamesTab);
+            filterCards(searchInput.value); // Re-filter based on current search
+        });
+        calcTab.addEventListener('click', () => {
+            updateTabs(calcTab);
+            filterCards(searchInput.value); // Re-filter based on current search
+        });
+
+        // Search Input Field
+        searchInput.addEventListener('input', () => {
+             filterCards(searchInput.value);
+        });
+
+        // Pause/Resume Banner Animation on Hover
+         adBanner.addEventListener("mouseenter", () => {
+             isTypingPaused = true;
+             adBanner.style.animationPlayState = "paused"; // Pause pulse
+             textGlowElement.style.animationPlayState = "paused"; // Pause glow
+             cursorElement.style.animationPlayState = "paused"; // Pause blink
+             clearTimeout(typeTimeout); // Stop typing timeout
+             clearTimeout(eraseTimeout); // Stop erasing timeout
+             clearTimeout(nextTextTimeout); // Stop next text timeout
+         });
+
+         adBanner.addEventListener("mouseleave", () => {
+             isTypingPaused = false;
+             adBanner.style.animationPlayState = "running"; // Resume pulse
+             textGlowElement.style.animationPlayState = "running"; // Resume glow
+
+             // Resume typing/erasing logic (simplified: restart current message cycle)
+             const currentTextLength = textGlowElement.textContent.length;
+             // Ensure adMessages[currentAdIndex] exists before accessing length
+             const targetTextLength = adMessages[currentAdIndex] ? adMessages[currentAdIndex].length : 0;
+
+
+             if (currentTextLength > 0 && currentTextLength < targetTextLength) {
+                 // If partially typed, continue typing (restart for simplicity)
+                 typeWriter(textGlowElement, cursorElement, adMessages[currentAdIndex], 60, nextText);
+             } else if (currentTextLength === targetTextLength && targetTextLength > 0) { // Check targetTextLength > 0
+                 // If fully typed (was waiting to erase), start erasing after a short delay
+                 cursorElement.style.animationPlayState = "paused"; // Keep cursor paused briefly
+                 eraseTimeout = setTimeout(() => {
+                     if (!isTypingPaused) eraseText(textGlowElement, cursorElement, 30, nextText);
+                 }, 1000);
+             } else if (currentTextLength > 0) {
+                 // If partially erased, continue erasing
+                 eraseText(textGlowElement, cursorElement, 30, nextText);
+             } else {
+                 // If fully erased (was waiting for next), start next text
+                 nextText();
+             }
+         });
+
+        // --- Initialisation ---
+
+        // Check initial theme preference
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const storedMode = localStorage.getItem('darkMode');
+        applyTheme(storedMode === 'true' || (storedMode === null && prefersDark));
+
+        // Start the banner animation cycle
+        typeWriter(textGlowElement, cursorElement, adMessages[0], 60, nextText);
+
+        // Apply initial filter (handles page reload with search term)
+        filterCards(searchInput.value);
+
+        // Set initial tab state
+        updateTabs(allTab); // Default to 'All' tab
+
     </script>
 </body>
 </html>
+
