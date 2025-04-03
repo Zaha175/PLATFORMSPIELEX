@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Spieleplattform Ultra - Eine Sammlung von kognitiven Tests und nützlichen Rechnern">
-    <title>Spieleplattform Ultra</title>
+    <title>Spieleplattform Ultra mit Logo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js"
+            }
+        }
+    </script>
     <script>
         // Tailwind Configuration
         tailwind.config = {
@@ -31,6 +38,7 @@
         }
     </script>
     <style>
+        /* --- Base Styles --- */
         /* 3D Rotation Animation for Cards */
         @keyframes rotateCard {
             0% { transform: perspective(800px) rotateY(0deg); }
@@ -45,223 +53,167 @@
             width: 160px; /* Reduced width */
             height: 160px; /* Reduced height */
             display: flex;
-            flex-direction: column; /* Stack content vertically */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-            transform-style: preserve-3d; /* Enable 3D transforms */
-            transform: perspective(800px) rotateY(0deg); /* Initial state */
-            padding: 0.75rem; /* Reduced padding (p-3) */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Default shadow */
+            transition: box-shadow 0.3s ease; /* Smooth transitions ONLY for box-shadow */
+            transform-style: preserve-3d;
+            transform: perspective(800px) rotateY(0deg);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         /* Improved Card Hover Effect */
         .card:hover {
-            animation: rotateCard 1s ease forwards; /* Apply rotation */
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
-            /* Optional: Subtle lift/tilt - might interfere with rotation visibility */
-            /* transform: scale(1.05) perspective(800px) rotateY(5deg); */
+            animation: rotateCard 1s ease forwards;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
         }
 
-        /* Remove pseudo-element background */
-        .card::before {
-           content: none;
-        }
+        .card::before { content: none; }
 
-        /* Card Content Styling */
         .card-content {
             position: relative;
             z-index: 1;
             text-align: center;
-            backface-visibility: hidden; /* Hide back during rotation */
+            backface-visibility: hidden;
             transform-style: preserve-3d;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%; /* Fill card height */
+            height: 100%;
         }
 
-        /* Smaller Font Sizes within Cards */
         .card h3 {
-             font-size: 0.8rem; /* Slightly smaller heading */
-             margin-bottom: 0.25rem; /* Reduced margin */
-             font-weight: 600; /* Tailwind semibold */
+             font-size: 0.8rem;
+             margin-bottom: 0.25rem;
+             font-weight: 600;
         }
-        .card p {
-            font-size: 0.65rem; /* Smaller category text */
-        }
-        .card .icon-container { /* Use a class for the icon div */
-             font-size: 1.25rem; /* Smaller icon size */
-             margin-bottom: 0.5rem; /* Reduced margin */
+        .card p { font-size: 0.65rem; }
+        .card .icon-container {
+             font-size: 1.25rem;
+             margin-bottom: 0.5rem;
         }
 
-        /* Card Border Indicators */
         .test-card { border-left: 3px solid #FF9800; }
         .game-card { border-left: 3px solid #4CAF50; }
         .health-card { border-left: 3px solid #E91E63; }
         .utility-card { border-left: 3px solid #2196F3; }
 
-        /* Page Background */
-        .main-bg {
-            background-color: #f7fafc; /* Light mode background */
-        }
-        body.dark .main-bg {
-            background-color: #1a202c; /* Dark mode background */
-        }
+        .main-bg { background-color: #f7fafc; }
+        body.dark .main-bg { background-color: #1a202c; }
 
-        /* Specific Card Backgrounds */
-         .figuren-bg { background-color: #001a33; color: white; }
-         .farben-bg { background-color: #cc9900; color: white; }
-         .verkehr-bg { background-color: #003300; color: white; }
-         .mehrfach-bg { background-color: #cc6600; color: white; }
-         .grokflotte-bg { background-color: #660066; color: white; }
-         .reaktion-bg { background-color: #90EE90; color: #333; } /* Light green with dark text */
-         /* Ensure health/utility cards have appropriate text color in dark mode */
-         body.dark .health-card p, body.dark .utility-card p { color: #a0aec0; } /* gray-500 */
-         body.dark .health-card h3, body.dark .utility-card h3 { color: #e2e8f0; } /* gray-200 */
+        .figuren-bg { background-color: #001a33; color: white; }
+        .farben-bg { background-color: #cc9900; color: white; }
+        .verkehr-bg { background-color: #003300; color: white; }
+        .mehrfach-bg { background-color: #cc6600; color: white; }
+        .grokflotte-bg { background-color: #660066; color: white; }
+        .reaktion-bg { background-color: #90EE90; color: #333; }
+        body.dark .health-card p, body.dark .utility-card p { color: #a0aec0; }
+        body.dark .health-card h3, body.dark .utility-card h3 { color: #e2e8f0; }
 
-
-        /* Ad Banner Styling */
+        /* Ad Banner Styles */
         #ad-banner {
-            text-align: center;
-            padding: 10px;
-            background-color: rgba(0, 51, 102, 0.8); /* Semi-transparent blue */
-            color: #ffd700; /* Gold text */
-            margin: 10px auto;
-            max-width: 95%; /* Responsive width */
-            border-radius: 5px;
-            border: 1px solid #ffd700; /* Gold border */
-            font-size: 1rem; /* Base font size */
-            font-weight: bold;
-            min-height: 1.5em; /* Ensure space for text */
-            cursor: default;
-            position: relative;
-            overflow: hidden; /* Hide overflowing effects */
-            animation: pulse 3s infinite ease-in-out; /* Pulse animation */
-            z-index: 5; /* Keep banner above cards */
+            text-align: center; padding: 10px; background-color: rgba(0, 51, 102, 0.8);
+            color: #ffd700; margin: 10px auto; max-width: 95%; border-radius: 5px;
+            border: 1px solid #ffd700; font-size: 1rem; font-weight: bold;
+            min-height: 1.5em; cursor: default; position: relative; overflow: hidden;
+            animation: pulse 3s infinite ease-in-out; z-index: 5;
         }
-
-        /* Banner Pulse Animation */
         @keyframes pulse {
              0% { box-shadow: 0 0 8px 0px rgba(255, 215, 0, 0.4); }
              50% { box-shadow: 0 0 16px 4px rgba(255, 215, 0, 0.6); }
              100% { box-shadow: 0 0 8px 0px rgba(255, 215, 0, 0.4); }
         }
-
-        /* Banner Text Glow Animation */
-        #ad-banner .text-glow {
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
+        #ad-banner .text-glow { animation: textGlow 2s ease-in-out infinite alternate; }
         @keyframes textGlow {
             from { text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700; }
             to { text-shadow: 0 0 8px #ffd700, 0 0 16px #ffd700, 0 0 24px #ff9900; }
         }
-
-        /* Typing Cursor Styling */
         .cursor {
-            display: inline-block;
-            width: 2px; /* Thin cursor */
-            height: 1em; /* Match text height */
-            background-color: #ffd700; /* Gold cursor */
-            margin-left: 1px;
-            animation: blink 1s infinite;
-            vertical-align: bottom; /* Align with text baseline */
+            display: inline-block; width: 2px; height: 1em; background-color: #ffd700;
+            margin-left: 1px; animation: blink 1s infinite; vertical-align: bottom;
         }
-        @keyframes blink { /* Cursor blink animation */
-             0%, 49% { opacity: 1; }
-             50%, 100% { opacity: 0; }
-        }
-
-        /* Dark Mode Banner Variants */
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
         body.dark #ad-banner {
-            background-color: rgba(68, 68, 68, 0.8); /* Darker semi-transparent */
-            border-color: #777; /* Gray border */
-            animation: pulseDark 3s infinite ease-in-out; /* Dark pulse */
+            background-color: rgba(68, 68, 68, 0.8); border-color: #777;
+            animation: pulseDark 3s infinite ease-in-out;
         }
-        @keyframes pulseDark { /* Dark mode pulse animation */
+        @keyframes pulseDark {
              0% { box-shadow: 0 0 8px 0px rgba(119, 119, 119, 0.4); }
              50% { box-shadow: 0 0 16px 4px rgba(119, 119, 119, 0.6); }
              100% { box-shadow: 0 0 8px 0px rgba(119, 119, 119, 0.4); }
         }
-        body.dark .cursor { background-color: #ddd; } /* Lighter cursor in dark mode */
-
-        /* Pause Banner Animations on Hover */
+        body.dark .cursor { background-color: #ddd; }
         #ad-banner:hover { animation-play-state: paused; }
         #ad-banner:hover .text-glow { animation-play-state: paused; }
-        /* JS handles cursor blink pause */
 
         /* Safari 3D Transform Support */
         @-webkit-keyframes rotateCard {
             0% { -webkit-transform: perspective(800px) rotateY(0deg); }
             100% { -webkit-transform: perspective(800px) rotateY(360deg); }
         }
-        .card:hover {
-            -webkit-animation: rotateCard 1s ease forwards;
+        .card:hover { -webkit-animation: rotateCard 1s ease forwards; }
+
+        /* --- Logo Styles --- */
+        header {
+            position: relative; /* Needed for absolute positioning of logo container */
+        }
+        #logo-container {
+            position: absolute;
+            top: 0.5rem;    /* Adjusted slightly */
+            left: 0.5rem;     /* Adjusted slightly */
+            width: 4rem;    /* Smaller base size */
+            height: 4rem;   /* Smaller base size */
+            z-index: 20;    /* Ensure logo is above header content */
+            pointer-events: none; /* Container doesn't block clicks */
+        }
+        /* Responsive logo size */
+        @media (min-width: 640px) { /* sm: */
+            #logo-container {
+                width: 5rem;  /* Slightly larger on sm screens */
+                height: 5rem;
+            }
+        }
+        #logo-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            pointer-events: auto; /* Canvas receives clicks */
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 640px) { /* Tailwind's 'sm' breakpoint */
-             .card {
-                  width: calc(50% - 0.5rem); /* Adjust width for 2 columns with gap */
-                  height: 140px; /* Slightly smaller height */
-                  margin-bottom: 0.75rem; /* Add bottom margin for spacing */
-             }
-             #ad-banner {
-                 font-size: 0.9rem; /* Smaller banner font */
-             }
-             /* Adjust card container for mobile */
-             #games-container, #calc-container {
-                 /* Using flexbox for better wrapping control on mobile */
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between; /* Distribute space */
-                 gap: 0; /* Remove grid gap, handle spacing with card margin */
-             }
-             .container {
-                 padding-left: 0.5rem; /* Reduce side padding */
-                 padding-right: 0.5rem;
-             }
-             /* Adjust tab padding/size */
-             .tab-button { /* Add a common class to tab buttons if needed */
-                 padding: 0.5rem 0.75rem;
-                 font-size: 0.875rem;
-             }
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 640px) { /* sm breakpoint */
+             .card { width: calc(50% - 0.5rem); height: 140px; margin-bottom: 0.75rem; }
+             #ad-banner { font-size: 0.9rem; }
+             #games-container, #calc-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0; }
+             .container { padding-left: 0.5rem; padding-right: 0.5rem; }
+             .tab-button { padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+             /* Adjust header padding slightly if logo overlaps too much */
+             header .container { padding-left: 4.5rem; } /* Add padding to header content to avoid logo overlap */
         }
-        @media (min-width: 641px) and (max-width: 1024px) { /* Medium screens */
-             .card {
-                  width: calc(33.33% - 1rem); /* Adjust for 3 columns */
-                  height: 150px;
-                  margin-bottom: 1rem;
-             }
-              #games-container, #calc-container {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between; /* Or space-around */
-                 gap: 0;
-             }
+        @media (min-width: 641px) and (max-width: 1024px) { /* md screens */
+             .card { width: calc(33.33% - 1rem); height: 150px; margin-bottom: 1rem; }
+              #games-container, #calc-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0; }
+              /* Adjust header padding */
+              header .container { padding-left: 6rem; }
         }
-         @media (min-width: 1025px) { /* Larger screens */
-             .card {
-                  width: calc(20% - 0.8rem); /* Adjust for 5 columns, slightly reduced gap */
-                  height: 160px;
-                  /* margin-bottom: 1rem; */ /* Use gap instead */
-             }
-              #games-container, #calc-container {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: flex-start; /* Align left */
-                 gap: 1rem; /* Use gap for larger screens */
-             }
+         @media (min-width: 1025px) { /* lg screens */
+             .card { width: calc(20% - 0.8rem); height: 160px; }
+              #games-container, #calc-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 1rem; }
+              /* Adjust header padding */
+              header .container { padding-left: 6rem; }
          }
-
-
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 main-bg min-h-screen">
     <header class="bg-white dark:bg-gray-800 shadow-md p-4 sticky top-0 z-10">
+        <div id="logo-container">
+            <canvas id="logo-canvas"></canvas>
+        </div>
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl md:text-2xl font-bold text-primary">Spieleplattform Ultra <span class="text-xs bg-primary text-white px-2 py-1 rounded ml-1 align-middle">CUB</span></h1>
             <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary">
@@ -296,7 +248,7 @@
             <div class="w-full">
                 <section id="games-section" class="mb-8">
                     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center"><i class="fas fa-gamepad mr-2 text-primary"></i> Spiele und Tests</h2>
-                     <div id="games-container" class="flex flex-wrap justify-start gap-4">
+                    <div id="games-container" class="flex flex-wrap justify-start gap-4">
                         <div class="card test-card figuren-bg" data-id="figurenvergleichstest1" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')" title="Figurenvergleichstest 1 starten">
                             <div class="card-content">
                                 <div class="icon-container text-orange-500"><i class="fas fa-shapes"></i></div>
@@ -865,6 +817,237 @@
         updateTabs(allTab); // Default to 'All' tab
 
     </script>
+
+    <script type="module">
+        // Import Three.js via importmap
+        import * as THREE from 'three';
+
+        /**
+         * Creates and animates the 3D logo.
+         * @param {string} canvasId - The ID of the Canvas element for the logo.
+         */
+        function create3DLogo(canvasId) {
+            let logoScene, logoCamera, logoRenderer, ring, vortex, particles = [], clock;
+
+            // Initializes the scene, camera, renderer
+            function init() {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) {
+                    console.error(`Canvas mit ID "${canvasId}" nicht gefunden.`);
+                    return;
+                }
+                const container = canvas.parentElement; // Get the container
+                if (!container) {
+                     console.error(`Container für Canvas mit ID "${canvasId}" nicht gefunden.`);
+                     return;
+                }
+
+                logoScene = new THREE.Scene();
+
+                // Camera setup (aspect ratio is set in resize)
+                logoCamera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+                logoCamera.position.z = 15; // Adjust distance if needed
+
+                // Renderer setup with transparent background
+                logoRenderer = new THREE.WebGLRenderer({
+                    antialias: true,
+                    canvas: canvas,
+                    alpha: true // Enable transparency
+                });
+                logoRenderer.setClearColor(0x000000, 0); // Fully transparent
+                logoRenderer.setPixelRatio(window.devicePixelRatio); // Sharper on HiDPI displays
+                // Set initial size (will be adjusted by resize)
+                logoRenderer.setSize(container.clientWidth, container.clientHeight);
+
+
+                createSceneElements(); // Create the 3D objects
+                setupInteractions();   // Add interactivity
+                clock = new THREE.Clock();
+                animate(); // Start the animation loop
+            }
+
+            // Creates the geometric elements of the logo
+            function createSceneElements() {
+                // Kerr ring (outer ring)
+                const ringGeometry = new THREE.TorusGeometry(4, 0.7, 32, 100);
+                // Material with metallic sheen
+                const ringMaterial = new THREE.MeshStandardMaterial({
+                     color: 0x00ff99, // Greenish color
+                     emissive: 0x00cc77, // Emissive color
+                     emissiveIntensity: 0.6,
+                     metalness: 0.8,
+                     roughness: 0.3
+                });
+                ring = new THREE.Mesh(ringGeometry, ringMaterial);
+                logoScene.add(ring);
+
+                // 5D gateway vortex (inner core)
+                const vortexGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+                 // Material with wireframe look and transparency
+                const vortexMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x0044ff, // Bluish color
+                    emissive: 0x0033cc, // Emissive color
+                    emissiveIntensity: 0.5,
+                    transparent: true,
+                    opacity: 0.4,
+                    wireframe: true
+                });
+                vortex = new THREE.Mesh(vortexGeometry, vortexMaterial);
+                logoScene.add(vortex);
+
+                // Particle stream (small spheres)
+                const particleGeometry = new THREE.SphereGeometry(0.08, 8, 8); // Smaller particles
+                const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff }); // White
+                for (let i = 0; i < 150; i++) { // Number of particles
+                    const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                    // Custom data for each particle's animation
+                    particle.userData = {
+                        angle: Math.random() * Math.PI * 2, // Start angle
+                        radius: 2 + Math.random() * 1,      // Distance from center
+                        height: -2 + Math.random() * 4,     // Height
+                        speed: 0.01 + Math.random() * 0.01   // Speed
+                    };
+                    logoScene.add(particle);
+                    particles.push(particle); // Add to particle list
+                }
+
+                // Lights for the scene
+                const ambientLight = new THREE.AmbientLight(0x555555); // Basic illumination
+                const pointLight = new THREE.PointLight(0x00ffaa, 1.5, 30); // Bright point light
+                pointLight.position.set(7, 7, 7);
+                logoScene.add(ambientLight);
+                logoScene.add(pointLight);
+            }
+
+            // Sets up click interaction
+            function setupInteractions() {
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+                const canvas = logoRenderer.domElement;
+
+                // Event listener for clicks on the canvas
+                canvas.addEventListener('click', (event) => {
+                    // Calculate mouse position relative to the canvas
+                    const rect = canvas.getBoundingClientRect();
+                    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+                    // Update raycaster
+                    raycaster.setFromCamera(mouse, logoCamera);
+                    // Check if the vortex was clicked
+                    const intersects = raycaster.intersectObject(vortex);
+
+                    if (intersects.length > 0) {
+                        // Change vortex material color on click
+                        vortex.material.color.set(Math.random() * 0xffffff); // Random color
+                        vortex.material.emissive.set(vortex.material.color); // Adjust emissive color
+                        console.log("Vortex geklickt!");
+                    }
+                });
+            }
+
+            // The main animation loop
+            function animate() {
+                requestAnimationFrame(animate); // Request next frame
+                const t = clock.getElapsedTime(); // Time since start
+
+                // Vortex pulsation (simple sine wave)
+                const scale = 1 + Math.sin(t * 1.5) * 0.1;
+                vortex.scale.set(scale, scale, scale);
+
+                // Animate vortex emissive intensity
+                const intensity = 0.5 + Math.abs(Math.sin(t * 1.5)) * 0.5;
+                if (vortex.material.emissiveIntensity !== undefined) {
+                     vortex.material.emissiveIntensity = intensity;
+                }
+                 // Animate ring emissive intensity slightly
+                 if (ring.material.emissiveIntensity !== undefined) {
+                     ring.material.emissiveIntensity = 0.6 + Math.abs(Math.sin(t * 0.8)) * 0.4;
+                 }
+
+                // Ring and vortex rotation
+                ring.rotation.x += 0.005;
+                ring.rotation.y += 0.01;
+                vortex.rotation.y -= 0.002;
+
+                // Particle movement
+                particles.forEach(p => {
+                    const userData = p.userData;
+                    userData.angle += userData.speed; // Increase angle
+                    // Recalculate position based on angle and radius
+                    p.position.x = Math.cos(userData.angle) * userData.radius;
+                    p.position.z = Math.sin(userData.angle) * userData.radius;
+                    p.position.y = userData.height + Math.sin(userData.angle * 1.5) * 0.5; // Slight vertical oscillation
+                });
+
+                logoRenderer.render(logoScene, logoCamera); // Render the scene
+            }
+
+            // Adjusts renderer size and camera aspect ratio to canvas size
+            function resize(width, height) {
+                if (!logoRenderer || !logoCamera) return; // Ensure everything is initialized
+
+                // Update camera aspect ratio
+                logoCamera.aspect = width / height;
+                logoCamera.updateProjectionMatrix();
+
+                // Adjust renderer size
+                logoRenderer.setSize(width, height);
+            }
+
+            // Call initialization
+            init();
+
+            // Return the resize function so it can be called from outside
+            return {
+                resize,
+            };
+        }
+
+        // ----- Logo Initialization and Resize Handling -----
+        try {
+            // Create and initialize the logo
+            const logoInstance = create3DLogo('logo-canvas');
+
+            // Function to adjust logo size to its container
+            const handleResize = () => {
+                const container = document.getElementById('logo-container');
+                // Check if container and logo instance with resize function exist
+                if (container && logoInstance && typeof logoInstance.resize === 'function') {
+                    // Use clientWidth/Height as they reflect the actual rendered size
+                    logoInstance.resize(container.clientWidth, container.clientHeight);
+                } else if (!container) {
+                    console.warn("Logo-Container nicht gefunden für Resize.");
+                } else if (!logoInstance || typeof logoInstance.resize !== 'function') {
+                     console.warn("Logo-Instanz oder resize-Funktion nicht verfügbar.");
+                }
+            };
+
+            // Add event listener for window resize events
+            window.addEventListener('resize', handleResize);
+
+            // Initial resize adjustment after a short timeout (ensures CSS/layout are calculated)
+            // Important if container size isn't fixed immediately.
+            setTimeout(handleResize, 100);
+
+        } catch (error) {
+             console.error("Fehler bei der Initialisierung des 3D-Logos:", error);
+             // Optional: Fallback display or error message in UI
+             const logoContainer = document.getElementById('logo-container');
+             if(logoContainer) {
+                 // Simple text message as fallback
+                 const errorMsg = document.createElement('p');
+                 errorMsg.textContent = 'Logo konnte nicht geladen werden.';
+                 errorMsg.style.color = 'red';
+                 errorMsg.style.fontSize = '10px';
+                 errorMsg.style.textAlign = 'center';
+                 errorMsg.style.padding = '5px';
+                 logoContainer.appendChild(errorMsg);
+                 // Hide canvas if error occurs
+                 const canvas = document.getElementById('logo-canvas');
+                 if (canvas) canvas.style.display = 'none';
+             }
+        }
+    </script>
 </body>
 </html>
-
